@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/scratch/code/Data-Structures-Algo/binaryTree.h
+cstdlib
+-
+
+/home/scratch/code/Data-Structures-Algo/bt_test.cpp
+iostream
+-
+binaryTree.h
+/home/scratch/code/Data-Structures-Algo/binaryTree.h
+
