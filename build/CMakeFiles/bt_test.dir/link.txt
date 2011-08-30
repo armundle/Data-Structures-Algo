@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/bt_test.dir/bt_test.cpp.o  -o bt_test -rdynamic 

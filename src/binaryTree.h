@@ -7,6 +7,8 @@ template<typename T>
 class BST
 {
     private:
+
+        enum TRAVERSAL {INORDER=0, POSTORDER=1, PREORDER=2};
         template<typename U>
             struct Node{
                 U data;
@@ -78,8 +80,114 @@ class BST
         }
 
 
+        void inOrder(Node<T>* node)
+        {
+          if(!node) return;
+
+          if(node->left) //if left node exists
+          {
+            inOrder(node->left);
+          }
+          
+          std::cout << node->data << std::endl;
+
+          if(node->right)
+          {
+            inOrder(node->right);
+          }
+
+         // std::cout << node->data << std::endl;
+        }
+
+
+        void postOrder(Node<T>* node)
+        {
+          if(!node) return;
+
+          if(node->left) //if left node exists
+          {
+            postOrder(node->left);
+          }
+          
+          if(node->right)
+          {
+            postOrder(node->right);
+          }
+
+         std::cout << node->data << std::endl;
+        }
+
+
+        void preOrder(Node<T>* node)
+        {
+          if(!node) return;
+
+          std::cout << node->data << std::endl;
+          
+          if(node->left) //if left node exists
+          {
+            preOrder(node->left);
+          }
+          
+          if(node->right)
+          {
+            preOrder(node->right);
+          }
+
+        }
+
+        /*
+        T path(Node<T>* node)
+        {
+          if(node==NULL) return NULL;
+
+          if((node->left)&&(node->right))
+          {
+            path(node->left);
+
+            path(node->right);
+          }
+          else if(node->left)
+          {
+            path(node->left);
+          }
+          else if(node->right)
+          {
+            path(node->right);
+          }
+          else
+          {
+            return node->data;
+          }
+        }
+        */
+
+        bool valid(Node<T>* node)
+        {
+          if(node==NULL) return true;
         
-        
+          Node<T>* tmp = node;
+
+          if(node->left)
+          {
+            tmp = node->left;
+
+            if(node->data >= tmp->data) return true;
+            else return false;
+          }
+
+
+          if(node->right)
+          {
+            tmp = node->right;
+
+            if(node->data < tmp->data) return true;
+            else return false;
+          }
+
+        }
+
+
 
     public:
         //Contructor
@@ -95,12 +203,11 @@ class BST
         bool insert(T val);
         bool del(T val);
         bool isEmpty() {return (head==0);};
-        void postOrder();
-        void preOrder();
-        void inOrder();
+        void print(int TRAVERSAL);
         T getMin();
         T getMax();
 
+        bool isBST();
 
 };
 
@@ -205,12 +312,38 @@ T BST<T>::getMax()
     {
         Node<T>* tmp = head;
 
-        std::cout << "here" << std::endl;
-
         while(tmp->right != NULL)
         {
             tmp = tmp->right;
         }
         return tmp->data;
     }
+}
+
+template<typename T>
+void BST<T>::print(int TRAVERSAL)
+{
+
+  switch (TRAVERSAL){
+    case 0:
+      std::cout << "Inorder traveral\n";
+      inOrder(head);
+      break;
+    case 1:
+      std::cout << "PostOrder traveral\n";
+      postOrder(head);
+      break;
+    case 2:
+      std::cout << "PreOrder traveral\n";
+      preOrder(head);
+      break;
+    default:
+      std::cout  << "Inorder = 0, PostOrder = 1, PreOrder =2. Please re-enter." << std::endl;
+}
+}
+  
+template<typename T>
+bool BST<T>::isBST()
+{
+  return(valid(head));
 }

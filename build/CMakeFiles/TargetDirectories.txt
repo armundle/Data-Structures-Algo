@@ -1,1 +1,0 @@
-/home/scratch/code/Data-Structures-Algo/build/CMakeFiles/bt_test.dir
